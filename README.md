@@ -1,6 +1,6 @@
 ### Coding Challenge Guidelines
 
-This challenge is composed of two parts
+This challenge is composed of two parts. Use JavaScript and React:
 
 * UbiRobot
 * UbiRocket
