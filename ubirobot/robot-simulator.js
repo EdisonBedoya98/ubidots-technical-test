@@ -1,7 +1,6 @@
 export class InvalidInputError extends Error {
   constructor() {
     super();
-    //throw new Error("Remove this statement and implement this function");
   }
 }
 
@@ -16,18 +15,14 @@ export class Robot {
       throw new InvalidInputError();
 
     this.robotBearing = direction;
-
-    //throw new Error("Remove this statement and implement this function");
   }
 
   get bearing() {
     return this.robotBearing;
-    // throw new Error("Remove this statement and implement this function");
   }
 
   get coordinates() {
     return this.robotPosition;
-    // throw new Error("Remove this statement and implement this function");
   }
 
   turnRight() {
@@ -45,8 +40,6 @@ export class Robot {
         this.robotBearing = "north";
         break;
     }
-
-    //throw new Error("Remove this statement and implement this function");
   }
 
   turnLeft() {
@@ -64,13 +57,10 @@ export class Robot {
         this.robotBearing = "south";
         break;
     }
-
-    // throw new Error("Remove this statement and implement this function");
   }
 
   at(x, y) {
     this.robotPosition = [x, y];
-    // throw new Error("Remove this statement and implement this function");
   }
 
   advance() {
@@ -91,7 +81,6 @@ export class Robot {
         this.robotPosition = [x - 1, y];
         break;
     }
-    // new Error("Remove this statement and implement this function");
   }
 
   static instructions(instructions) {
@@ -112,17 +101,27 @@ export class Robot {
       }
     }
     return decodedInstructions;
-    // throw new Error("Remove this statement and implement this function");
   }
 
   place({ x, y, direction }) {
     this.robotPosition = [x, y];
     this.robotBearing = direction;
-    //throw new Error("Remove this statement and implement this function");
   }
 
   evaluate(instructions) {
-    //instructions(instructions);
-    //throw new Error("Remove this statement and implement this function");
+    const decodedIntructions = Robot.instructions(instructions);
+    for (let index = 0; index < decodedIntructions.length; index++) {
+      switch (decodedIntructions[index]) {
+        case "turnLeft":
+          this.turnLeft();
+          break;
+        case "turnRight":
+          this.turnRight();
+          break;
+        case "advance":
+          this.advance();
+          break;
+      }
+    }
   }
 }

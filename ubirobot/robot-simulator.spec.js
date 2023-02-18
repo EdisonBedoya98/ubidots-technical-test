@@ -131,7 +131,7 @@ describe("Robot", () => {
     expect(robot.bearing).toEqual("west");
   });
 
-  xtest("instruct many robots", () => {
+  test("instruct many robots", () => {
     const robot1 = new Robot();
     const robot2 = new Robot();
     const robot3 = new Robot();
