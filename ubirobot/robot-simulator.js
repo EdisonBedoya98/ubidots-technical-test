@@ -3,82 +3,99 @@ export class InvalidInputError extends Error {
     super();
   }
 }
-
-export class Robot {
-  constructor() {
-    this.allowedDirecions = ["east", "west", "north", "south"];
-    this.robotPosition = [0, 0];
+class Position {
+  constructor(x, y, bearing) {
+    this.x = x;
+    this.y = y;
+    this.bearing = bearing;
+  }
+  setCoordinates(x, y) {
+    this.x = x;
+    this.y = y;
   }
 
-  orient(direction) {
-    if (!this.allowedDirecions.includes(direction))
-      throw new InvalidInputError();
-
-    this.robotBearing = direction;
-  }
-
-  get bearing() {
-    return this.robotBearing;
+  setPosition(x, y, bearing) {
+    this.x = x;
+    this.y = y;
+    this.bearing = bearing;
   }
 
   get coordinates() {
-    return this.robotPosition;
+    return [this.x, this.y];
+  }
+}
+export class Robot {
+  constructor() {
+    this.allowedDirections = ["east", "west", "north", "south"];
+    this.position = new Position(0, 0, "north");
+  }
+
+  orient(bearing) {
+    if (!this.allowedDirections.includes(bearing))
+      throw new InvalidInputError();
+
+    this.position.bearing = bearing;
+  }
+
+  get bearing() {
+    return this.position.bearing;
+  }
+
+  get coordinates() {
+    return this.position.coordinates;
   }
 
   turnRight() {
-    switch (this.robotBearing) {
+    switch (this.position.bearing) {
       case "north":
-        this.robotBearing = "east";
+        this.position.bearing = "east";
         break;
       case "east":
-        this.robotBearing = "south";
+        this.position.bearing = "south";
         break;
       case "south":
-        this.robotBearing = "west";
+        this.position.bearing = "west";
         break;
       case "west":
-        this.robotBearing = "north";
+        this.position.bearing = "north";
         break;
     }
   }
 
   turnLeft() {
-    switch (this.robotBearing) {
+    switch (this.position.bearing) {
       case "north":
-        this.robotBearing = "west";
+        this.position.bearing = "west";
         break;
       case "east":
-        this.robotBearing = "north";
+        this.position.bearing = "north";
         break;
       case "south":
-        this.robotBearing = "east";
+        this.position.bearing = "east";
         break;
       case "west":
-        this.robotBearing = "south";
+        this.position.bearing = "south";
         break;
     }
   }
 
   at(x, y) {
-    this.robotPosition = [x, y];
+    this.position.setCoordinates(x, y);
   }
 
   advance() {
-    const x = this.robotPosition[0];
-    const y = this.robotPosition[1];
-
-    switch (this.robotBearing) {
+    switch (this.position.bearing) {
       case "north":
-        this.robotPosition = [x, y + 1];
+        this.position.y += 1;
         break;
       case "east":
-        this.robotPosition = [x + 1, y];
+        this.position.x += 1;
         break;
       case "south":
-        this.robotPosition = [x, y - 1];
+        this.position.y -= 1;
         break;
       case "west":
-        this.robotPosition = [x - 1, y];
+        this.position.x -= 1;
         break;
     }
   }
@@ -104,8 +121,7 @@ export class Robot {
   }
 
   place({ x, y, direction }) {
-    this.robotPosition = [x, y];
-    this.robotBearing = direction;
+    this.position.setPosition(x, y, direction);
   }
 
   evaluate(instructions) {
