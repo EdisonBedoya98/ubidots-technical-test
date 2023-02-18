@@ -1,17 +1,27 @@
-
 export class InvalidInputError extends Error {
   constructor() {
-    throw new Error("Remove this statement and implement this function");
+    super();
+    //throw new Error("Remove this statement and implement this function");
   }
 }
 
 export class Robot {
-  orient() {
-    throw new Error("Remove this statement and implement this function");
+  constructor() {
+    this.allowedDirecions = ["east", "west", "north", "south"];
+  }
+
+  orient(direction) {
+    if (!this.allowedDirecions.includes(direction))
+      throw new InvalidInputError();
+
+    this.robotBearing = direction;
+
+    //throw new Error("Remove this statement and implement this function");
   }
 
   get bearing() {
-    throw new Error("Remove this statement and implement this function");
+    return this.robotBearing;
+    // throw new Error("Remove this statement and implement this function");
   }
 
   get coordinates() {
@@ -19,7 +29,16 @@ export class Robot {
   }
 
   turnRight() {
-    throw new Error("Remove this statement and implement this function");
+    switch (this.robotBearing) {
+      case "north":
+        //this.
+        break;
+
+      default:
+        break;
+    }
+
+    //throw new Error("Remove this statement and implement this function");
   }
 
   turnLeft() {
