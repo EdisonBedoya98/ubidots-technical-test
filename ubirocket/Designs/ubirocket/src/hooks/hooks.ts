@@ -6,6 +6,7 @@ import {
   removeItemLocalStorage,
   setItemLocalStorage,
 } from "@/services/services";
+import { socialMediaTypes } from "@/interfaces";
 
 export const useCountDown = () => {
   const [countdown, setCountdown] = useState({
@@ -51,13 +52,19 @@ export const useCountDown = () => {
 export const useNextLaunchCountDown = () => {
   const [nextLaunchData, setNextLaunchData] = useState<any>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
   useEffect(() => {
-    getNextLaunchCounterData().then((data) => {
-      setNextLaunchData(data);
-      setIsLoading(false);
-    });
+    getNextLaunchCounterData()
+      .then((data) => {
+        setNextLaunchData(data);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        setIsError(true);
+      });
   }, []);
-  return { nextLaunchData, isLoading };
+  return { nextLaunchData, isLoading, isError };
 };
 
 export const useFavoriteLaunch = (id: string) => {
@@ -90,13 +97,41 @@ export const useFavoriteLaunch = (id: string) => {
 
 export const useLaunches = () => {
   const [upcomingLaunchesData, setUpcomingLaunchesData] = useState<any[]>([]);
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setisError] = useState(false);
   useEffect(() => {
-    getUpcomingLaunchesData().then((data) => {
-      setUpcomingLaunchesData(data);
-      setisLoading(false);
-    });
+    getUpcomingLaunchesData()
+      .then((data) => {
+        setUpcomingLaunchesData(data);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        setisError(true);
+      });
   }, []);
 
-  return { upcomingLaunchesData, isLoading };
+  return { upcomingLaunchesData, isLoading, isError };
+};
+
+export const useHeader = () => {
+  const handleShare = (platform: socialMediaTypes) => {
+    let url = window.location.href;
+    switch (platform) {
+      case "facebook":
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
+        break;
+      case "twitter":
+        window.open(`https://twitter.com/intent/tweet?url=${url}`);
+        break;
+      case "linkedin":
+        window.open(
+          `https://www.linkedin.com/sharing/share-offsite/?url=${url}`
+        );
+        break;
+      default:
+        break;
+    }
+  };
+  return { handleShare };
 };

@@ -4,8 +4,10 @@ import Spinner from "../spinner/spinner";
 import { useLaunches } from "@/hooks/hooks";
 
 function TableLaunches() {
-  const { upcomingLaunchesData, isLoading } = useLaunches();
+  const { upcomingLaunchesData, isLoading, isError } = useLaunches();
 
+  if (isError)
+    return <span>Ha ocurrido un error, por favor recargue la página</span>;
   return (
     <div className="h-full w-full max-w-7xl overflow-scroll  bg-gradient-to-r from-[#382937] via-[#312534] to-[#271f30]  pt-10 px-4">
       {isLoading ? (
