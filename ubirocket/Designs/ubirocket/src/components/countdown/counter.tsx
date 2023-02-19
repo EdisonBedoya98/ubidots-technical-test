@@ -1,14 +1,34 @@
+import { useCountDown } from "@/hooks/hooks";
 import { CounterItemInformationProps } from "@/interfaces";
-import React from "react";
+import Spinner from "../spinner/spinner";
 
 function Counter() {
+  const { countdown, isLoading } = useCountDown();
   return (
     <div className="h-full min-h-[40rem] w-full max-w-7xl bg-gradient-to-r from-[#224344] via-[#23393c] to-[#253035] px-4 ">
       <div className="h-full py-5 w-full text-white text-xs font-light flex flex-col gap-y-4 items-center justify-around ">
-        <CounterItemInformation value={2} valueMeaning="DAYS" />
-        <CounterItemInformation value={7} valueMeaning="HOURS" />
-        <CounterItemInformation value={59} valueMeaning="MINUTES" />
-        <CounterItemInformation value={31} valueMeaning="SECONDS" />
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <CounterItemInformation
+              value={countdown.days}
+              valueMeaning="DAYS"
+            />
+            <CounterItemInformation
+              value={countdown.hours}
+              valueMeaning="HOURS"
+            />
+            <CounterItemInformation
+              value={countdown.minutes}
+              valueMeaning="MINUTES"
+            />
+            <CounterItemInformation
+              value={countdown.seconds}
+              valueMeaning="SECONDS"
+            />
+          </>
+        )}
       </div>
     </div>
   );
