@@ -1,7 +1,9 @@
 import { useRouter } from "next/router";
 import Counter from "./counter";
-import ArrowIcon from "@/assets/chevron-down.svg";
 import Spinner from "../spinner/spinner";
+
+import { BsChevronDown } from "react-icons/bs";
+
 import { useNextLaunchCountDown } from "@/hooks/hooks";
 
 function Countdown() {
@@ -32,10 +34,10 @@ const CountDownInfo = ({ rocketName }: { rocketName: string }) => {
         Upcoming : {rocketName}
       </h1>
       <Counter />
-      <ArrowIcon
-        className="w-7 cursor-pointer mt-3"
-        alt="ArrowIcon"
+      <BsChevronDown
+        className="cursor-pointer mt-3 text-white"
         onClick={() => router.push("/")}
+        size={30}
       />
     </>
   );

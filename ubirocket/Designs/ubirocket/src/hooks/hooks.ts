@@ -8,7 +8,7 @@ import {
 } from "@/services/services";
 import { socialMediaTypes } from "@/interfaces";
 
-export const useCountDown = () => {
+export const useCountDown = (launchDate = "Mar 1, 2023 00:00:00") => {
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -19,7 +19,7 @@ export const useCountDown = () => {
 
   useEffect(() => {
     // Set the date we're counting down to
-    const countDownDate = new Date("Mar 1, 2023 00:00:00").getTime();
+    const countDownDate = new Date(launchDate).getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();

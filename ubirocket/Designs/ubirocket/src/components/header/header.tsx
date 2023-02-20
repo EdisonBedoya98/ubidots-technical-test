@@ -20,13 +20,13 @@ function Header() {
         >
           Countdown
         </li>
-        <button onClick={() => handleShare("facebook")}>
+        <button aria-label="facebook" onClick={() => handleShare("facebook")}>
           <FaFacebook />
         </button>
-        <button onClick={() => handleShare("twitter")}>
+        <button aria-label="twitter" onClick={() => handleShare("twitter")}>
           <FaTwitter />
         </button>
-        <button onClick={() => handleShare("linkedin")}>
+        <button aria-label="linkedin" onClick={() => handleShare("linkedin")}>
           <FaLinkedin />
         </button>
       </ul>

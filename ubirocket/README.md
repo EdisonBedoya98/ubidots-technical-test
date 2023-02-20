@@ -51,4 +51,3 @@ Make sure to include all source code in the repository. To make reviewing easier
 - Testing: is the system adequately tested? do your components have unit tests?
 - Responsiveness and full mobile compatibility
 - Elegantly use placeholders/skeletons when fetching data
-

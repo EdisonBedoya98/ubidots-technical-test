@@ -43,10 +43,7 @@ const TableData = ({
           <tr className="border-b last:border-none" key={index}>
             <td>{upcomingLaunch.rocket?.rocket_name}</td>
             <td>{dateToUTC(upcomingLaunch.launch_date_local)}</td>
-            <td>
-              {upcomingLaunch.launch_site.site_name}
-              {}
-            </td>
+            <td>{upcomingLaunch.launch_site.site_name}</td>
             <td>
               <Favorite id={upcomingLaunch.launch_site.site_id} />
             </td>
